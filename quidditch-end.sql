@@ -15,18 +15,18 @@ mysql> SELECT team.name AS team, COUNT(*) as nb_player FROM player
 
 
 #2
-mysql> SELECT team.name AS team, COUNT(*) as nb_player FROM player
+mysql> SELECT team.name AS team FROM player
     -> JOIN team ON player.team_id = team.id
     -> GROUP BY team_id
     -> HAVING nb_player > 14
     -> ORDER BY team ASC;
-+------------+-----------+
-| team       | nb_player |
-+------------+-----------+
-| Gryffindor |        36 |
-| Ravenclaw  |        15 |
-| Slytherin  |        21 |
-+------------+-----------+
++------------+
+| team       |
++------------+
+| Gryffindor |
+| Ravenclaw  |
+| Slytherin  |
++------------+
 
 #3
 mysql> SELECT wizard.lastname, wizard.firstname FROM wizard
