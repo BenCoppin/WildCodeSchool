@@ -1,5 +1,5 @@
 
-#1
+--1
 mysql> SELECT team.name AS team, COUNT(*) as nb_player FROM player
     -> JOIN team ON player.team_id = team.id
     -> GROUP BY team_id
@@ -14,7 +14,7 @@ mysql> SELECT team.name AS team, COUNT(*) as nb_player FROM player
 +------------+-----------+
 
 
-#2
+--2
 mysql> SELECT team.name AS team FROM player
     -> JOIN team ON player.team_id = team.id
     -> GROUP BY team_id
@@ -28,7 +28,7 @@ mysql> SELECT team.name AS team FROM player
 | Slytherin  |
 +------------+
 
-#3
+--3
 mysql> SELECT wizard.lastname, wizard.firstname FROM wizard
     -> JOIN player ON wizard.id = player.wizard_id
     -> JOIN team ON player.team_id = team.id

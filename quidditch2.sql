@@ -45,6 +45,8 @@ mysql> SELECT wizard.firstname, wizard.lastname FROM wizard
 mysql> SELECT wizard.firstname, wizard.lastname FROM wizard
     -> JOIN player ON player.wizard_id=wizard.id
     -> WHERE player.enrollment_date BETWEEN '1995-01-01' and '1998-01-01' AND player.role = 'keeper';
+        AND enrollement_date <= '1998-12-31' 
+        AND role LIKE 'keeper');;
 +-----------+------------+
 | firstname | lastname   |
 +-----------+------------+
@@ -58,9 +60,16 @@ mysql> SELECT wizard.firstname, wizard.lastname FROM wizard
 ------------------------------------------------------------------------------------
 --3
 
-mysql> SELECT wizard.firstname, wizard.lastname, player.role FROM wizard
-    -> JOIN player ON player.wizard_id=wizard.id
-    -> WHERE player.enrollment_date BETWEEN '1995-01-01' and '1998-01-01' AND player.role = 'chaser';
+SELECT wizard.firstname, wizard.lastname, player.role
+FROM wizard
+JOIN player
+ON wizard.id=player.wizard_id
+WHERE wizard.id IN (
+		SELECT wizard_id
+                FROM player 
+                WHERE enrollement_date >= '1995-01-01' 
+		AND enrollement_date <= '1998-12-31' 
+		AND role LIKE 'chaser');;
 +-----------+------------+--------+
 | firstname | lastname   | role   |
 +-----------+------------+--------+
