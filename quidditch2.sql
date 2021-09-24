@@ -3,9 +3,10 @@
 SELECT firstname, lastname
 FROM wizard
 WHERE id IN (
-	SELECT wizard_id
-	FROM player 
-	WHERE enrollement_date >= '1995-01-01' AND enrollement_date <= '1998-12-31');;
+                  SELECT wizard_id
+                  FROM player
+                  WHERE enrollment_date BETWEEN '1995-01-01' AND '1998-12-31'
+                  );
 +-----------+-----------------+
 | firstname | lastname        |
 +-----------+-----------------+
@@ -45,13 +46,14 @@ WHERE id IN (
 ------------------------------------------------------------------------------------
 --2
 
+SELECT firstname, lastname
 FROM wizard
 WHERE id IN (
-	SELECT wizard_id
-	FROM player 
-	WHERE enrollement_date >= '1995-01-01' 
-        AND enrollement_date <= '1998-12-31' 
-        AND role LIKE 'keeper');;
+                  SELECT wizard_id
+                  FROM player
+                  WHERE enrollment_date BETWEEN '1995-01-01' AND '1998-12-31'
+                  AND role = 'keeper'
+                  );
 +-----------+------------+
 | firstname | lastname   |
 +-----------+------------+
@@ -65,16 +67,16 @@ WHERE id IN (
 ------------------------------------------------------------------------------------
 --3
 
-SELECT wizard.firstname, wizard.lastname, player.role
+SELECT firstname, lastname, player.role
 FROM wizard
-JOIN player
-ON wizard.id=player.wizard_id
+JOIN player 
+     ON wizard.id = player.wizard_id
 WHERE wizard.id IN (
-		SELECT wizard_id
-                FROM player 
-                WHERE enrollement_date >= '1995-01-01' 
-		AND enrollement_date <= '1998-12-31' 
-		AND role LIKE 'chaser');;
+                  SELECT wizard_id
+                  FROM player
+                  WHERE enrollment_date BETWEEN '1995-01-01' AND '1998-12-31'
+                  AND role = 'chaser'
+                  );
 +-----------+------------+--------+
 | firstname | lastname   | role   |
 +-----------+------------+--------+
